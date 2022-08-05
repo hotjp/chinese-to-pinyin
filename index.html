@@ -11,13 +11,13 @@
     <body>
         <textarea id="code" placeholder="从excel里复制一列需转换为拼音的文字" style="width:200px; height:700px;"></textarea>
         <button type="button" id="btn" class="btn btn-primary btn-sm">转换</button>
-        <div id="result" class="clearfix">
+        <textarea id="result" placeholder="这里将输出结果" style="width:200px; height:700px;"></textarea>
         </div>
         <script>
             document.getElementById('btn').addEventListener('click', function() {
                 const str = document.getElementById('code').value;
                 
-                document.getElementById('result').innerHTML = format(str);
+                document.getElementById('result').value = format(str);
             });
         </script>
     </body>
