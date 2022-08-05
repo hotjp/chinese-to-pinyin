@@ -9,7 +9,7 @@
         <script type="text/javascript" src="./index.js"></script>
     </head>
     <body>
-        <textarea id="code" placeholder="从excel里复制一列需转换为拼音的文字" style="width:200px; height:700px;"></textarea>
+        <textarea id="code" placeholder="从excel里复制一列需转换为拼音的文字" style="width:200px; height:700px;"> </textarea>
         <button type="button" id="btn" class="btn btn-primary btn-sm">转换</button>
         <div id="result" class="clearfix">
         </div>
@@ -17,7 +17,7 @@
             document.getElementById('btn').addEventListener('click', function() {
                 const str = document.getElementById('code').value;
                 
-                document.getElementById('result').innerHTML = format(str).join('&nbsp;&nbsp;');
+                document.getElementById('result').innerHTML = format(str);
             });
         </script>
     </body>
