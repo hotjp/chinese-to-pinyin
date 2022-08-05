@@ -11,7 +11,7 @@ function format(text) {
   let result = [];
   list.forEach((item) => {
     lineIndex += item.listLength;
-    result.push(` ${item.pinyin} `);
+    result.push(`&nbsp;${item.pinyin}&nbsp;`);
     if (lineIndex >= MAX_LINE_LENGTH) {
       lineIndex = 0;
       result.push("</br>");
