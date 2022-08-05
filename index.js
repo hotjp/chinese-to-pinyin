@@ -6,28 +6,47 @@ function format(text) {
     return trans(str);
   });
   let lineIndex = 0;
-  const MAX_LINE_LENGTH = 8;
+  const MAX_LINE_LENGTH = 10;
   let result = [];
   let lineSpaceLength = [];
-  list.forEach((item) => {
-    lineIndex += item.listLength;
-    lineSpaceLength.push(item.spaceLength);
-    result.push(`&nbsp;${item.pinyin}&nbsp;`);
-    if (lineIndex >= MAX_LINE_LENGTH) {
+  list.forEach((item,index) => {
+    // 换行+添加括号逻辑：总数大于等于限制数，加本条超过限制数
+    if (lineIndex >= MAX_LINE_LENGTH || lineIndex + item.listLength > MAX_LINE_LENGTH) {
       lineIndex = 0;
-      result.push("</br>");
+      result.push("\n");
       result.push(
         lineSpaceLength
           .map((num) => {
             let space = "";
             for (let i = 0; i < num; i++) {
-              space += "&nbsp;";
+              space += " ";
             }
             return `（${space}）`;
           })
           .join(" ")
       );
-      result.push("</br>");
+      result.push("\n");
+      lineSpaceLength.length = 0;
+    }
+    lineIndex += item.listLength;
+    lineSpaceLength.push(item.spaceLength);
+    result.push(`  ${item.pinyin} `);
+    // 最后一行逻辑：追加括号
+    if(index == list.length - 1){
+      lineIndex = 0;
+      result.push("\n");
+      result.push(
+        lineSpaceLength
+          .map((num) => {
+            let space = "";
+            for (let i = 0; i < num; i++) {
+              space += " ";
+            }
+            return `（${space}）`;
+          })
+          .join(" ")
+      );
+      result.push("\n");
       lineSpaceLength.length = 0;
     }
   });
